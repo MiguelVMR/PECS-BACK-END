@@ -1,8 +1,10 @@
-package com.pecs.model;
+package com.pecs.model.schema;
+
+import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.pecs.utils.Enum.TipoTelefone;
+import com.pecs.model.enums.TipoTelefone;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,11 +26,11 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Telefone extends AbstractEntity {
+public class TelefoneSchema extends AbstractEntitySchema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(length = 15, nullable = false)
     private String numero;
@@ -41,14 +43,14 @@ public class Telefone extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "clinica_id", nullable = false)
-    private Clinica clinica;
+    private ClinicaSchema clinica;
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
-    private Paciente paciente;
+    private PacienteSchema paciente;
 
     @ManyToOne
     @JoinColumn(name = "usuarioClinico_id", nullable = false)
-    private UsuarioClinico usuarioClinico;
+    private UsuarioClinicoSchema usuarioClinico;
 
 }

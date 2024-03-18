@@ -1,13 +1,11 @@
-package com.pecs.model;
+package com.pecs.model.schema;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.pecs.utils.Enum.AreaAtuacao;
-import com.pecs.utils.Enum.Especialidade;
-
+import com.pecs.model.enums.AreaAtuacao;
+import com.pecs.model.enums.Especialidade;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,20 +28,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "usuario_clinico", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class UsuarioClinico extends AbstractEntity {
+public class UsuarioClinicoSchema extends AbstractEntitySchema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(nullable = false)
     private String nome;
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(length = 11)
+    private String cpf;
 
     @Column(nullable = false)
     private String senha;
@@ -64,12 +65,24 @@ public class UsuarioClinico extends AbstractEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false)
-    private Endereco endereco;
+    private EnderecoSchema endereco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioClinico", fetch = FetchType.LAZY)
-    private List<Telefone> telefones = new ArrayList<Telefone>();
+    private List<TelefoneSchema> telefones;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioClinico", fetch = FetchType.LAZY)
-    private List<Consulta> consultas = new ArrayList<Consulta>();
+    @Column(name = "token_senha", length = 8)
+    private String tokenSenha;
+
+    @Column(name = "firs_login")
+    private boolean firstLogin;
+
+    @Column(name = "keycloak_user_id")
+    private String keycloakUserId;
+    
+    @Column(name = "email_confirmado")
+    private Boolean emailConfirmado = false;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioClinico", fetch = FetchType.EAGER)
+    private List<ConsultaSchema> consultas;
 
 }

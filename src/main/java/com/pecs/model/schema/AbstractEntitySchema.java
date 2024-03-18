@@ -1,18 +1,20 @@
-package com.pecs.model;
+package com.pecs.model.schema;
 
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
-public class AbstractEntity {
+public class AbstractEntitySchema {
 
     @Column(name = "criado_em", nullable = false, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @Temporal(TemporalType.TIMESTAMP)
@@ -26,15 +28,7 @@ public class AbstractEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime deletadoEm;
 
-    @PrePersist
-    public void prePersistTimestamp() {
-        criadoEm = LocalDateTime.now();
-        alteradoEm = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdateTimestamp() {
-        alteradoEm = LocalDateTime.now();
-    }
+    @Column(name = "desabilitado")
+    private Boolean disabled;
 
 }

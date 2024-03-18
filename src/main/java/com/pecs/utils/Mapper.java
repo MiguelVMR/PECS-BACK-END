@@ -11,6 +11,8 @@ import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.modelmapper.ModelMapper;
 
+import com.pecs.model.dto.UsuarioClinico;
+
 public class Mapper {
   
   private final ModelMapper modelMapper = new ModelMapper();
@@ -31,43 +33,43 @@ public class Mapper {
     return from.stream().map(model -> modelMapper.map(model, to)).collect(Collectors.toList());
   }
 
-  // public static HashMap<String, List<String>> attributes(Usuario usuario) {
-  //   HashMap<String, List<String>> attributes = new HashMap<>();
+  public static HashMap<String, List<String>> attributes(UsuarioClinico usuario) {
+    HashMap<String, List<String>> attributes = new HashMap<>();
 
-  //   attributes.put("telefone", Collections.singletonList(usuario.getTelefone()));
+    attributes.put("telefone", Collections.singletonList(usuario.getTelefones().get(0).getNumero()));
 
-  //   return attributes;
-  // }
+    return attributes;
+  }
 
-  // public CredentialRepresentation credentialRepresentation(String senha) {
-  //   CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
-  //   credentialRepresentation.setTemporary(false);
-  //   credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
-  //   credentialRepresentation.setValue(senha);
+  public CredentialRepresentation credentialRepresentation(String senha) {
+    CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+    credentialRepresentation.setTemporary(false);
+    credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+    credentialRepresentation.setValue(senha);
 
-  //   return credentialRepresentation;
-  // }
+    return credentialRepresentation;
+  }
 
-  // public UserRepresentation converter(Usuario usuario, Boolean isNovo) {
+  public UserRepresentation converter(UsuarioClinico usuario, Boolean isNovo) {
 
-  //   if (Objects.isNull(usuario)) {
-  //     return null;
-  //   }
-  //   UserRepresentation userRepresentation = new UserRepresentation();
+    if (Objects.isNull(usuario)) {
+      return null;
+    }
+    UserRepresentation userRepresentation = new UserRepresentation();
 
-  //   Optional.of(usuario).ifPresent(u -> {
-  //     userRepresentation.setFirstName(u.getNome());
-  //     userRepresentation.setUsername(u.getEmail());
-  //     userRepresentation.setEmail(u.getEmail());
-  //     userRepresentation.setEmailVerified(u.getEmailConfirmado());
-  //     userRepresentation.setEnabled(!u.getDisabled());
-  //     userRepresentation.setAttributes(attributes(u));
+    Optional.of(usuario).ifPresent(u -> {
+      userRepresentation.setFirstName(u.getNome());
+      userRepresentation.setUsername(u.getEmail());
+      userRepresentation.setEmail(u.getEmail());
+      userRepresentation.setEmailVerified(u.getEmailConfirmado());
+      userRepresentation.setEnabled(!u.getDisabled());
+      userRepresentation.setAttributes(attributes(u));
 
-  //     if (isNovo) {
-  //       userRepresentation.setCredentials(Collections.singletonList(credentialRepresentation(u.getSenha())));
-  //     }
-  //   });
+      if (isNovo) {
+        userRepresentation.setCredentials(Collections.singletonList(credentialRepresentation(u.getSenha())));
+      }
+    });
 
-  //   return userRepresentation;
-  // }
+    return userRepresentation;
+  }
 }

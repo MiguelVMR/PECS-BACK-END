@@ -1,12 +1,12 @@
-package com.pecs.model;
+package com.pecs.model.schema;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.pecs.utils.Enum.EstadoCivil;
+import com.pecs.model.enums.EstadoCivil;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -32,14 +32,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "paciente", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Paciente extends AbstractEntity {
+public class PacienteSchema extends AbstractEntitySchema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name = "documento", length = 20, nullable = false, unique = true)
     private String documento;
@@ -75,15 +75,15 @@ public class Paciente extends AbstractEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false)
-    private Endereco endereco;
+    private EnderecoSchema endereco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente", fetch = FetchType.LAZY)
-    private List<Telefone> telefones = new ArrayList<Telefone>();
+    private List<TelefoneSchema> telefones;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente", fetch = FetchType.LAZY)
-    private List<Consulta> consultas = new ArrayList<Consulta>();
+    private List<ConsultaSchema> consultas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente", fetch = FetchType.LAZY)
-    private List<AtividadePaciente> atividadePacientes = new ArrayList<AtividadePaciente>();
+    private List<AtividadePacienteSchema> atividadePacientes;
 
 }

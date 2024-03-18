@@ -1,12 +1,9 @@
-package com.pecs.model;
+package com.pecs.model.schema;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.UUID;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.pecs.utils.Enum.TipoClinica;
-
+import com.pecs.model.enums.TipoClinica;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,11 +29,11 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Clinica extends AbstractEntity {
+public class ClinicaSchema extends AbstractEntitySchema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name = "documento", length = 20, nullable = false, unique = true)
     private String documento;
@@ -53,21 +50,21 @@ public class Clinica extends AbstractEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false)
-    private Endereco endereco;
+    private EnderecoSchema endereco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<Telefone> telefones = new ArrayList<Telefone>();
+    private List<TelefoneSchema> telefones;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<Consulta> consultas = new ArrayList<Consulta>();
+    private List<ConsultaSchema> consultas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<Diagnostico> diagnosticos = new ArrayList<Diagnostico>();
+    private List<DiagnosticoSchema> diagnosticos;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<Prescricao> prescricoes = new ArrayList<Prescricao>();
+    private List<PrescricaoSchema> prescricoes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<AtividadePaciente> atividadePacientes = new ArrayList<AtividadePaciente>();
+    private List<AtividadePacienteSchema> atividadePacientes;
 
 }

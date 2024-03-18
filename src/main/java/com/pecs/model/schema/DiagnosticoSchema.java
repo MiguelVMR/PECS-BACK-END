@@ -1,4 +1,6 @@
-package com.pecs.model;
+package com.pecs.model.schema;
+
+import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -22,21 +24,21 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Diagnostico extends AbstractEntity {
+public class DiagnosticoSchema extends AbstractEntitySchema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(length = 5000, nullable = false)
     private String descricoes;
 
     @ManyToOne
     @JoinColumn(name = "consulta_id", nullable = false)
-    private Consulta consulta;
+    private ConsultaSchema consulta;
 
     @ManyToOne
     @JoinColumn(name = "clinica_id", nullable = false)
-    private Clinica clinica;
+    private ClinicaSchema clinica;
 
 }

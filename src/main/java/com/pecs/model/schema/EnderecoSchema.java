@@ -1,4 +1,6 @@
-package com.pecs.model;
+package com.pecs.model.schema;
+
+import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -24,11 +26,11 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Endereco extends AbstractEntity {
+public class EnderecoSchema extends AbstractEntitySchema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(length = 255, nullable = false)
     private String logradouro;
@@ -53,14 +55,14 @@ public class Endereco extends AbstractEntity {
 
     @JsonIgnore
     @OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
-    private Clinica clinica;
+    private ClinicaSchema clinica;
 
     @JsonIgnore
     @OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
-    private Paciente paciente;
+    private PacienteSchema paciente;
 
     @JsonIgnore
     @OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
-    private UsuarioClinico usuarioClinico;
+    private UsuarioClinicoSchema usuarioClinico;
 
 }
