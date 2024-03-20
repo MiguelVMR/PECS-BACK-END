@@ -39,4 +39,8 @@ public class UsuarioClinicoGateway {
         return mapper.converter(usuarioSchema, UsuarioClinico.class);
     }
 
+    public UsuarioClinico findById(String keycloakId){
+        return mapper.converter(usuarioRepository.findByKeycloakUserId(keycloakId), UsuarioClinico.class);
+    }
+
 }
