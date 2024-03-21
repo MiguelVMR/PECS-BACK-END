@@ -30,13 +30,11 @@ public class Clinica extends AbstractEntity {
 
     private List<Telefone> telefones;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Consulta> consultas;
 
-    private List<Diagnostico> diagnosticos;
+    private List<Paciente> pacientes;
 
-    private List<Prescricao> prescricoes;
-
-    private List<AtividadePaciente> atividadePacientes;
 
 
 }

@@ -43,16 +43,8 @@ public class ConsultaSchema extends AbstractEntitySchema {
     private String observacoes;
 
     @ManyToOne
-    @JoinColumn(name = "paciente_id", nullable = false)
-    private PacienteSchema paciente;
-
-    @ManyToOne
     @JoinColumn(name = "clinica_id", nullable = false)
     private ClinicaSchema clinica;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_clinico_id", nullable = false)
-    private UsuarioClinicoSchema usuarioClinico;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "consulta", fetch = FetchType.LAZY)
     private List<DiagnosticoSchema> diagnosticos;

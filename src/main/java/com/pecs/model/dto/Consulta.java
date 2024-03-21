@@ -22,11 +22,8 @@ public class Consulta extends AbstractEntity {
 
     private String observacoes;
 
-    private Paciente paciente;
-
     private Clinica clinica;
 
-    private UsuarioClinico usuarioClinico;
 
     private List<Diagnostico> diagnosticos;
 

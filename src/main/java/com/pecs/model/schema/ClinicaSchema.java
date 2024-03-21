@@ -2,23 +2,10 @@ package com.pecs.model.schema;
 
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.pecs.model.enums.TipoClinica;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -58,13 +45,8 @@ public class ClinicaSchema extends AbstractEntitySchema {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
     private List<ConsultaSchema> consultas;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<DiagnosticoSchema> diagnosticos;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<PrescricaoSchema> prescricoes;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<AtividadePacienteSchema> atividadePacientes;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_pacientes"))
+    private List<PacienteSchema> pacientes;
 
 }
