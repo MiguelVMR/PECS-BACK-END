@@ -18,12 +18,9 @@ public class Consulta extends AbstractEntity {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private UUID id;
 
-    private Date data_consulta;
+    private Date dataConsulta;
 
     private String observacoes;
-
-    private Clinica clinica;
-
 
     private List<Diagnostico> diagnosticos;
 

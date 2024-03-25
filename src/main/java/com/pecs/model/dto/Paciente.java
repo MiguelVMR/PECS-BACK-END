@@ -1,15 +1,15 @@
 package com.pecs.model.dto;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pecs.model.enums.EstadoCivil;
-import com.pecs.model.schema.AtividadePacienteSchema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -46,5 +46,5 @@ public class Paciente extends AbstractEntity{
 
     private List<Consulta> consultas;
 
-    private List<AtividadePacienteSchema> atividadePacientes;
+    private List<AtividadePaciente> atividadePacientes;
 }

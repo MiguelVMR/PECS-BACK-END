@@ -21,8 +21,4 @@ public class AtividadePaciente extends AbstractEntity {
 
     private String observacoes;
 
-    private Paciente paciente;
-
-    private Clinica clinica;
-
 }

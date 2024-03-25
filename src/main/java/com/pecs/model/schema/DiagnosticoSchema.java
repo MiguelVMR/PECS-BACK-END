@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "diagnostico", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
+@Table(name = "diagnostico")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
@@ -33,12 +33,5 @@ public class DiagnosticoSchema extends AbstractEntitySchema {
     @Column(length = 5000, nullable = false)
     private String descricoes;
 
-    @ManyToOne
-    @JoinColumn(name = "consulta_id", nullable = false)
-    private ConsultaSchema consulta;
-
-    @ManyToOne
-    @JoinColumn(name = "clinica_id", nullable = false)
-    private ClinicaSchema clinica;
 
 }

@@ -37,19 +37,17 @@ public class ConsultaSchema extends AbstractEntitySchema {
 
     @Column(name = "data_consulta", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date data_consulta;
+    private Date dataConsulta;
 
-    @Column(length = 5000, nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String observacoes;
 
-    @ManyToOne
-    @JoinColumn(name = "clinica_id", nullable = false)
-    private ClinicaSchema clinica;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "consulta", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "consulta_id")
     private List<DiagnosticoSchema> diagnosticos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "consulta", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "consulta_id")
     private List<PrescricaoSchema> prescricoes;
 
 }

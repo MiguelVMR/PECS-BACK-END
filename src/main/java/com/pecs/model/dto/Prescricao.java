@@ -20,7 +20,4 @@ public class Prescricao extends AbstractEntity{
 
     private String dosagem;
 
-    private Consulta consulta;
-
-    private Clinica clinica;
 }

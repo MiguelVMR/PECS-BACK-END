@@ -44,7 +44,7 @@ public class TelefoneSchema extends AbstractEntitySchema {
     @ManyToOne
     @JoinColumn(name = "clinica_id", nullable = false)
     private ClinicaSchema clinica;
-
+    
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
     private PacienteSchema paciente;

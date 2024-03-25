@@ -68,5 +68,8 @@ public class PacienteSchema extends AbstractEntitySchema {
     @JoinColumn(name = "paciente_id", foreignKey = @ForeignKey(name = "fk_paciente_x_consulta"))
     private List<ConsultaSchema> consultas;
 
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<AtividadePacienteSchema> atividadePacientes;
+
 
 }

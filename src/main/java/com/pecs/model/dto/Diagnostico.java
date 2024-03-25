@@ -18,8 +18,5 @@ public class Diagnostico extends AbstractEntity {
 
     private String descricoes;
 
-    private Consulta consulta;
-
-    private Clinica clinica;
 
 }

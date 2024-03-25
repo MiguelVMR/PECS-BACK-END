@@ -39,13 +39,4 @@ public class AtividadePacienteSchema extends AbstractEntitySchema {
 
     @Column(length = 5000, nullable = false)
     private String observacoes;
-
-    @ManyToOne()
-    @JoinColumn(name = "paciente_id", nullable = false)
-    private PacienteSchema paciente;
-
-    @ManyToOne
-    @JoinColumn(name = "clinica_id", nullable = false)
-    private ClinicaSchema clinica;
-
 }

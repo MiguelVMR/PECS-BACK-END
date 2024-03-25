@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "clinica", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
+@Table(name = "clinica")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
@@ -42,7 +42,8 @@ public class ClinicaSchema extends AbstractEntitySchema {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
     private List<TelefoneSchema> telefones;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_consultas"))
     private List<ConsultaSchema> consultas;
 
     @OneToMany(fetch = FetchType.LAZY)
