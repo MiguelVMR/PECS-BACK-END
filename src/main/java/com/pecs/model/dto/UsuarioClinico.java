@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pecs.model.enums.AreaAtuacao;
 import com.pecs.model.enums.Especialidade;
+import com.pecs.model.schema.PacienteSchema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -58,5 +59,10 @@ public class UsuarioClinico extends AbstractEntity{
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Boolean emailConfirmado = false;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<Paciente> pacientes;
+
+    private Clinica clinica;
 
 }

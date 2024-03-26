@@ -50,4 +50,6 @@ public class ClinicaSchema extends AbstractEntitySchema {
     @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_pacientes"))
     private List<PacienteSchema> pacientes;
 
+
+
 }

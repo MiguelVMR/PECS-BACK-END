@@ -1,9 +1,9 @@
 package com.pecs.controller;
 
-import com.pecs.business.ClinicaBusiness;
+import com.pecs.business.PacienteBusiness;
 import com.pecs.exception.PecsExceptionController;
 import com.pecs.model.dto.Clinica;
-import com.pecs.model.dto.UsuarioClinico;
+import com.pecs.model.dto.Paciente;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,23 +18,25 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
- * The Class ClinicaController
+ * The Class PacienteController
  *
  * @author Miguel Vilela Moraes Ribeiro
- * @sincer 20/03/2024
+ * @sincer 26/03/2024
  */
 
 @RestController
-@RequestMapping("/clinina")
-@Tag(name = "Modulo de Clinica")
-public class ClinicaController {
+@RequestMapping("/paciente")
+@Tag(name = "Modulo de Paciente")
+public class PacienteController {
 
-    private final ClinicaBusiness clinicaBusiness;
+    private final PacienteBusiness pacienteBusiness;
 
     @Autowired
-    public ClinicaController(ClinicaBusiness clinicaBusiness) {
-        this.clinicaBusiness = clinicaBusiness;
+    public PacienteController(PacienteBusiness pacienteBusiness) {
+        this.pacienteBusiness = pacienteBusiness;
     }
 
     @ApiResponses({
@@ -43,38 +45,35 @@ public class ClinicaController {
                     @Content(schema = @Schema(implementation = PecsExceptionController.ErrorHandling.class))}),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
                     @Content(schema = @Schema(implementation = PecsExceptionController.ErrorHandling.class))}),
-            @ApiResponse(responseCode = "409", description = "Conflict", content = {
-                    @Content(schema = @Schema(implementation = PecsExceptionController.ErrorHandling.class))}),
     })
-    @Operation(summary = "Endpoint responsável por realizar a criação de Clinica")
-    @PostMapping("create-clinica")
+    @Operation(summary = "Endpoint responsável por realizar a criação de paciente")
+    @PostMapping("create-paciente")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Clinica> save(
-            @RequestBody @Valid final Clinica clinica,
+    public ResponseEntity<Paciente> save(
+            @RequestBody @Valid final Paciente paciente,
             JwtAuthenticationToken token) {
 
-        Clinica clinicaSalva = clinicaBusiness.save(clinica, token);
+        Paciente pacienteSalvo = pacienteBusiness.salvarPacienteVinculadoUsuario(paciente, token);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(clinicaSalva);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteSalvo);
     }
-
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
                     @Content(schema = @Schema(implementation = PecsExceptionController.ErrorHandling.class))}),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
                     @Content(schema = @Schema(implementation = PecsExceptionController.ErrorHandling.class))}),
-            @ApiResponse(responseCode = "409", description = "Conflict", content = {
-                    @Content(schema = @Schema(implementation = PecsExceptionController.ErrorHandling.class))}),
     })
-    @Operation(summary = "Endpoint responsável por resgatar Clinica")
+    @Operation(summary = "Endpoint responsável por realizar a busca de todos os pacientes do Usuario Logado")
     @GetMapping()
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Clinica> findClinica(
+    public ResponseEntity<List<Paciente>> findAllPacientes(
             JwtAuthenticationToken token) {
 
-        Clinica clinicaSalva = clinicaBusiness.findByUsuario(token);
+        List<Paciente> pacientes = pacienteBusiness.findAllPacientesUser( token);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(clinicaSalva);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pacientes);
     }
+
+
 }

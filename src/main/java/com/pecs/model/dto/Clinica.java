@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pecs.model.enums.TipoClinica;
+import com.pecs.model.schema.UsuarioClinicoSchema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,8 +34,7 @@ public class Clinica extends AbstractEntity {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Consulta> consultas;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Paciente> pacientes;
-
-
 
 }
