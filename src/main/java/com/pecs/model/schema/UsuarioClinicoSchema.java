@@ -51,10 +51,10 @@ public class UsuarioClinicoSchema extends AbstractEntitySchema {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false)
-    private EnderecoSchema endereco;
+    private EnderecoUsuarioSchema endereco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioClinico", fetch = FetchType.LAZY)
-    private List<TelefoneSchema> telefones;
+    private List<TelefoneUsuarioSchema> telefones;
 
     @Column(name = "token_senha", length = 8)
     private String tokenSenha;

@@ -22,10 +22,4 @@ public class Telefone extends AbstractEntity {
     private TipoTelefone tipo;
 
     private String ramal;
-
-    private Clinica clinica;
-
-    private Paciente paciente;
-
-    private UsuarioClinico usuarioClinico;
 }

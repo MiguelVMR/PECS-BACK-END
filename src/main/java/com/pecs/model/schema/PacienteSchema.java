@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.pecs.model.enums.EstadoCivil;
 
@@ -14,11 +13,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "paciente", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
+@Table(name = "paciente")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 public class PacienteSchema extends AbstractEntitySchema {
 
     @Id
@@ -58,11 +56,11 @@ public class PacienteSchema extends AbstractEntitySchema {
     private Boolean politicamenteExposto;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "endereco_id", nullable = false)
-    private EnderecoSchema endereco;
+    @JoinColumn(name = "endereco_paciente_id", nullable = false)
+    private EnderecoPacienteSchema endereco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente", fetch = FetchType.LAZY)
-    private List<TelefoneSchema> telefones;
+    private List<TelefonePacienteSchema> telefones;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id", foreignKey = @ForeignKey(name = "fk_paciente_x_consulta"))

@@ -28,9 +28,4 @@ public class Endereco extends AbstractEntity{
 
     private String complemento;
 
-    private Clinica clinica;
-
-    private Paciente paciente;
-
-    private UsuarioClinico usuarioClinico;
 }

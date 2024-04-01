@@ -55,14 +55,16 @@ public class UsuarioClinico extends AbstractEntity{
     @JsonIgnore
     private String keycloakUserId;
 
+    @JsonIgnore
     private List<Consulta> consultas;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonIgnore
     private Boolean emailConfirmado = false;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonIgnore
     private List<Paciente> pacientes;
 
+    @JsonIgnore
     private Clinica clinica;
 
 }

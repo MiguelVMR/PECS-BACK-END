@@ -37,10 +37,10 @@ public class ClinicaSchema extends AbstractEntitySchema {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false)
-    private EnderecoSchema endereco;
+    private EnderecoClinicaSchema endereco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
-    private List<TelefoneSchema> telefones;
+    private List<TelefoneClinicaSchema> telefones;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_consultas"))
