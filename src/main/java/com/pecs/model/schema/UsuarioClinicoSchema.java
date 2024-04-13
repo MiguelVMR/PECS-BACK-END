@@ -64,20 +64,12 @@ public class UsuarioClinicoSchema extends AbstractEntitySchema {
 
     @Column(name = "keycloak_user_id")
     private String keycloakUserId;
-    
+
     @Column(name = "email_confirmado")
     private Boolean emailConfirmado = false;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_usuario_x_consulta"))
-    private List<ConsultaSchema> consultas;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_usuario_x_paciente"))
-    private List<PacienteSchema> pacientes;
-
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "clinica_id",foreignKey = @ForeignKey(name = "fk_clinica_x_usuario"))
+    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_usuario"))
     private ClinicaSchema clinica;
 
 }

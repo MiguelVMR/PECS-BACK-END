@@ -42,14 +42,4 @@ public class ClinicaSchema extends AbstractEntitySchema {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clinica", fetch = FetchType.LAZY)
     private List<TelefoneClinicaSchema> telefones;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_consultas"))
-    private List<ConsultaSchema> consultas;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_pacientes"))
-    private List<PacienteSchema> pacientes;
-
-
-
 }
