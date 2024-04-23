@@ -1,19 +1,23 @@
 package com.pecs.model.schema;
 
 import java.util.Date;
-import java.util.List;
+// import java.util.List;
 import java.util.UUID;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -42,12 +46,15 @@ public class ConsultaSchema extends AbstractEntitySchema {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String observacoes;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "consulta_id")
-    private List<DiagnosticoSchema> diagnosticos;
+    @ManyToOne
+    @JoinColumn(name = "paciente_id", foreignKey = @ForeignKey(name = "fk_paciente_x_consulta"))
+    private PacienteSchema paciente;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "consulta_id")
-    private List<PrescricaoSchema> prescricoes;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_usuario_x_consulta"))
+    private UsuarioClinicoSchema usuarioClinico;
 
+    @ManyToOne
+    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_consulta"))
+    private ClinicaSchema clinica;
 }

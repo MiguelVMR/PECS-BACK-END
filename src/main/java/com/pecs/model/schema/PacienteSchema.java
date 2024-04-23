@@ -1,7 +1,7 @@
 package com.pecs.model.schema;
 
 import java.util.Date;
-import java.util.List;
+// import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
@@ -59,15 +59,8 @@ public class PacienteSchema extends AbstractEntitySchema {
     @JoinColumn(name = "endereco_paciente_id", nullable = false)
     private EnderecoPacienteSchema endereco;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente", fetch = FetchType.LAZY)
-    private List<TelefonePacienteSchema> telefones;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "paciente_id", foreignKey = @ForeignKey(name = "fk_paciente_x_consulta"))
-    private List<ConsultaSchema> consultas;
-
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<AtividadePacienteSchema> atividadePacientes;
-
+    @ManyToOne
+    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_paciente"))
+    private ClinicaSchema clinica;
 
 }

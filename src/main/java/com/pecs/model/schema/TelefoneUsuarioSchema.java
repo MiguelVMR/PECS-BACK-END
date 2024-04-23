@@ -33,4 +33,7 @@ public class TelefoneUsuarioSchema {
     @Column(name = "ramal", columnDefinition = "VARCHAR(15) DEFAULT NULL")
     private String ramal;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_usuario_x_telefone_usuario"))
+    private UsuarioClinicoSchema usuarioClinico;
 }

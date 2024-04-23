@@ -32,4 +32,8 @@ public class TelefoneClinicaSchema {
 
     @Column(name = "ramal", columnDefinition = "VARCHAR(15) DEFAULT NULL")
     private String ramal;
+
+    @ManyToOne
+    @JoinColumn(name = "clinica_id", foreignKey = @ForeignKey(name = "fk_clinica_x_telefone_clinica"))
+    private ClinicaSchema clinica;
 }
