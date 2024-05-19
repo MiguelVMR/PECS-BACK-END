@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/clinina")
+@RequestMapping("/clinica")
 @Tag(name = "Modulo de Clinica")
 public class ClinicaController {
 
