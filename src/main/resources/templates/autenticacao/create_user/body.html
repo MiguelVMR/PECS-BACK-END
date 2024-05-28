@@ -289,7 +289,7 @@
     <tr>
         <td></td>
         <td style="width: 80%">
-            <p class="nome-aplicacao"> GF Point </p>
+            <p class="nome-aplicacao"> PECS </p>
         </td>
         <td></td>
     </tr>
