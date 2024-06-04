@@ -49,9 +49,9 @@ public class UsuarioClinicoSchema extends AbstractEntitySchema {
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "endereco_id", nullable = false)
-    private EnderecoUsuarioSchema endereco;
+    // @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @JoinColumn(name = "endereco_id", nullable = false)
+    // private EnderecoUsuarioSchema endereco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioClinico", fetch = FetchType.LAZY)
     private List<TelefoneUsuarioSchema> telefones;

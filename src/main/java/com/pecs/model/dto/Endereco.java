@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Endereco extends AbstractEntity{
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    
     private String logradouro;
 
     private String bairro;

@@ -42,7 +42,7 @@ public class UsuarioClinico extends AbstractEntity{
 
     private Especialidade especialidade;
 
-    private Endereco endereco;
+    // private Endereco endereco;
 
     private List<Telefone> telefones;
 

@@ -16,15 +16,15 @@ import lombok.NoArgsConstructor;
 @MappedSuperclass
 public class AbstractEntitySchema {
 
-    @Column(name = "criado_em", nullable = false, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "criado_em")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime criadoEm;
 
-    @Column(name = "alterado_em", nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "alterado_em")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime alteradoEm;
 
-    @Column(name = "deletado_em", nullable = true, columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT NULL")
+    @Column(name = "deletado_em")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime deletadoEm;
 

@@ -22,7 +22,7 @@ public abstract class AbstractEntity {
     private LocalDateTime deletadoEm;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Boolean disabled;
+    private Boolean disabled = false;
 
     public void setDisabled(Boolean disabled) {
         if (disabled) {
